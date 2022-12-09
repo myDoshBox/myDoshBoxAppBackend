@@ -1,0 +1,25 @@
+{
+  "name": "mydoshboxappbackend",
+  "version": "1.0.0",
+  "description": "myDoshboxApp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myDoshBox/myDoshBoxAppBackend.git"
+  },
+  "keywords": [
+    "transactions",
+    "money",
+    "buyers",
+    "sellers"
+  ],
+  "author": "myDoshbox Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/myDoshBox/myDoshBoxAppBackend/issues"
+  },
+  "homepage": "https://github.com/myDoshBox/myDoshBoxAppBackend#readme"
+}
