@@ -1,0 +1,130 @@
+1. install TypeScript globally - npm install -g typescript. if it gives issues, install as an administrator
+
+2. run the command - tsc --init
+
+3. edit the following tsconfig.json:
+"rootDir": "./src" /* Specify the root folder within your source files. */,
+"outDir": "./build" /* Specify an output folder for all emitted files. */,
+"moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
+"sourceMap": true,        /* Create source map files for emitted JavaScript files. */
+"typeRoots": ["src/@types", "./node_modules/@types"]
+
+4. you can then install other packages:
+yarn add express typescript nodemon ts-node @types/express @types/node
+
+5. to the scripts in package.json, add these:
+"start": "node ./build/index.js",
+"build": "tsc -p .",
+"dev": "nodemon ./src/index.ts"
+
+5b. run "npm run build"
+
+--FOR DOCKER
+6. we create a docker file - Dockerfile and add these:
+FROM node:latest
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY package.json /usr/src/app/
+RUN yarn add
+COPY . /usr/src/app/
+EXPOSE 3001
+CMD ["yarn", "dev"]
+
+7. then run "docker build -t appname ." on the terminal. here, we build the image - this points it to the local directory where the docker file is
+
+8. then run "docker run --publish 3000:3000" on the terminal to map the port of the app to the port it should use on the docker container
+
+
+
+
+
+
+
+**DOCKER**
+Chapter 1
+*Images and Containers*
+image is a blueprint for a container. it contains details such as: Runtime Environment, Application Code, Any Dependencies, Extra Configurations(e.g. env variables), Commands. Images have a file system of their own and they are read-only i.e. they cannot be altered once they've been created.If you want to change something, you have to create a new image.
+
+The container is a running instance of the image. it is a process that runs our application as specified on the image. it is also known as an isolated process meaning that they run independently from any process on our computer. it runs in its own box somewhere packaged with everything it needs to run the application inside it
+
+other developers can take that image and run a similar container on their on system for the same application. it won't matter the version of the technologies used, the application will still behave the same because it has all been prepacked inside the image
+
+
+*Docker Hub and Parent Images*
+How Images are Made
+Images are made up from several/diff layers. each layer adds something to the image incrementally. The order of the layer matters. We start with the PARENT IMAGE(first layer of the image): which includes a light-weight OS and sometimes the Runtime environment of the container that we want. this means that you could have a parent image which has a specific node version installed like node 17 or 16 on a linux distribution. this layer in itself is a docker image already created, we just create a new image on top of it. the layers that follow can include the source code, Dependencies, specifying any initial script. to work with the parent images, you work with dockerhub - an online repository for docker images. it contains premade image.
+Steps in Getting a Parent Image:
+    - you go to "hub.docker.com"
+
+    - search for the image you want and download. say we want to create a new docker image for a project, and it needs to run in a node environment. the initial layer of our image would be a parent node image. we can search for it on docker hub by typing node into the search bar.
+
+    - we type the command - "docker pull node" for downloading the image on our cli and press enter. on the specified command, we can choose to download a specific version(and underlying linux distribution it should run on top of) of node by indicating it - "docker pull node version". it doesn't matter the directory we download it to cos that is not where it will download. you can view your download in the docker app on your desktop.
+
+    - N/B: it is always beneficial to always specify a node version to lock the version into your image otherwise, it will always grab the latest one and this can change overtime. it is also important to note that it could also be a python or ruby or php or mysql image, etc.
+
+    - in the docker app, you will see the parent image(this is going to be used as the initial layer in our own image) you started and click run. this creates/spins up a container which is going to contain a linux environment or a linux distribution and node installed into it.
+
+
+Chapter 2
+*Dockerfile*
+we can think of the extra layers as changes that we are making to the image for example, we copy source code over to the image, install dependencies on the image, commands inside the image as well. to create our own docker image with all of the different layers, we use something called a "Dockerfile" - which is a set of instructions to docker to create the image and the Dockerfile essentially lists out all the different layers or instructions to create those layers on an image.
+How to Create a Dockerfile to Create an Image 
+for example, we have an api stored in an api folder listening on port 4000 and has 2 dependencies(cors and express) listed in package.json. we run the command "node app.js" which is the name of the file we want to run which is what will cause the api to run directly on our computer.
+
+With docker, we want to run our application inside of an isolated container with its own version of node running inside it. To be able to do this, we need to make an image. 
+    - that image should contain the initial parent image layer to say what version of node and linux distribution we want the container to run 
+
+    - and after that the extra layer will be to copy the source code and all the dependencies into it and some extra info too. 
+    To Start:
+    a. Make a Dockerfile in the root of the project folder. this Dockerfile is like a set of instructions that tells docker how to create a specific image with all of its different layers and each instruction is going to be a different line inside the file. Each line in a Dockerfile represents a different layer in our final image
+    b. Install the docker package for vscode before starting to write out the file
+        Dockerfile instructions
+            1. the first layer of our image will be parent image. the node image which we can download from dockerhub. 
+                command - FROM node:17-alpine
+                this command says that we want to pull in the node image into our image as the inital layer. when we run this file later to create our image, it'll pull in the node image first. it is going to pull it from either the dockerhub repository if we haven't already pulled it in or our own computer if we have.
+
+            2. next, we will be adding our own additional layers. the next set of command will be to copy all of our source code into the image, i.e, the app.js file and the package.json file as well.
+                command - COPY . ./src
+                -- this command mean to copy files to the image. 
+                the first "." is a relative path to the directory we want to copy the source files from. since in our case, the source files are in the root directory as the Dockerfile, then the path is going to be a single "." which means the current directory. if all our source code was in a src(or other names) folder in the project folder, then instead of a ".", it will be "./src". 
+                -- the second "." is the path inside the image that I want to copy my source code to. remember that the images have their own folder structure. the second "." here says to copy the source code to the root directory of the iamge that we are creating. N/B: a lot of the time, we don't copy into the root directory because it might clash with other files or folders inside the root directory. so instead, we copy to a path which is "/app" for example. this will copy our new files into a new directory callled "app" inside the image. 
+
+            3. the next layer is all the dependencies that we need to install on the image. to install dependencies into a project, we run "npm install" or "yarn install". we can do a similar thing to the image that we make. we are allowed to specify the commands that we want to run in the image as the image is built at bulid-time. to specify the command, we use the RUN instruction.
+                command - RUN npm install or RUN yarn install
+                this installs all the dependencies listed in the package.json file which we already copied into the image in the previous step using COPY. this current RUN command tells docker to run the command on the image itself as this layer is being added on while the image is being built so that all the project dependencies will be installed onto the image as well. 
+            4. it poses a problem - the command itself will be run in the root directory of the image but our package.json file got copied to an "app" folder. this means that when this command gets run in the root folder of the image, it won't see the package.json file in that folder and therefore it won't install the dependencies. for this to work, we need to run this RUN command in the same directory as our package.json which in our case is the "app" folder. we can achieve this by specifying a working directory for our image which is done by adding a WORKDIR command before the COPY command so that every instruction after it can use the WORKDIR command:
+                command - WORKDIR /app
+                with this command, we tell docker that when we run commands on the image in future after the WORKDIR instruction or if we specify paths inside the image, to do it from inside the WORKDIR(folder) specified - in our case /app. when this has been specified, we can modify the COPY command to - "COPY . ." we do this because we don't want the app to copy to ". /app/app".   
+            5. The next command is written to run the application in a container. we won't use the run command because it is run as the image is being built and so at build time. it is important to remember that the image is not a running application but a blueprint for a container which is an instance of the application. so it doesn't make sense to run the "node app.js" command at build time because we are not trying to run the application while we are building the image, we are just making the image. what we want to do is to run the "node app.js" command when we have a running instance of the image inside of the container. to specify this, we use the instruction CMD instead of RUN:
+                command - CMD ["node", "app.js"] or CMD ["nodemon" "./src/index.ts"]
+                this command ensures that when the container runs, the CMD command will be spin up our application inside of the container after its built.
+            6. Finally, we have the "EXPOSE" instruction which tells docker which port the container should expose - this is gotten from the port which we set up to listen on when we start writing our API. this app will be running inside the container so the port will be owned by the container, not our computer. to make request to this API, we need to send them to the container using the port number we created/exposed. so, in the docker file, we can add an instruction which tells docker what port is going to be exposed by the container. 
+                command - EXPOSE 3002
+            this expose instruction is kinda optional because we only need it if we'll be running images and spinning up containers using the docker desktop application because docker desktop will use this info in the Dockerfile to set up something called "port-mapping" later on. this won't be necessary if we are running containers from the command line but its cool to add it so that at a glance of the Dockerfile, you can tell which port has been exposed for the particular application that you're running.  
+
+            COMMAND SUMMARY
+            - FROM node:17-alpine -- specifying a parent image at the start as the 1st layer
+
+            - WORKDIR /app -- then we specify a working directory of the image
+
+            - COPY . . -- then we copy over all the source files
+
+            - RUN yarn install or RUN npm install -- to add all the dependencies to the image at build-time
+
+            - EXPOSE 3002 -- expose port for connecting to the api stored in the container
+
+            - CMD ["node", "app.js"] or CMD ["nodemon", "./src/index.ts"] - command that should be run only when the container based on the image is run
+
+    c. The next step after building the Dockerfile is to build the image. we do this by running a command in the same directory as the Dockerfile is in. in the terminal, run the command:
+        command - "docker build -t  ."
+        "-t" helps us give the image a name and the "." is a relative path to the Dockerfile from the directory the app is in and since we are in the same directory as the Dockerfile, the "." is to say that we are in the current same directory that we are in. when we hit enter, it is going through each of the instructions in the Dockerfile and do each one in turn and each time it does one of those, it is essentially adding a new layer to the docker image that we are creating when we hit enter. you will see each of those steps happening in the terminal as we watch the build process. once the build process is done, the image is created. this process does not create a new file or folder for us to represent our image because it is stored away in a special docker folder somewhere on our computer. in our docker desktop though, we can see the extra image listed there with the name that we gave it
+
+
+Chapter 3
+*dockerignore*
+its ok if we don't have node_modules on our computer because we will be running the dependencies inside of our container via the "RUN npm install" command. we will be ruuning the image we created via an isolated container. sometimes the node_modules folder will exist on our local project on our computer. if we were to create another image based on the project, then in the copy step, it will copy the entire node modules folder as well because we are copying everything over from the first directory which is "." this bad for 2 reasons:
+    - first, we already installed everything on the image using the "RUN npm install" command. this installs the node_modules folder directly on the image whilst we already have node_modules on our local machine. what this means is that during the copying step during the image build, it is going to replace the one already created on the image which will be a problem if some of the packages installed on our local machine is out of date. Another reason it is a bad idea is that it is going to take more time to create the image and copy over all the files because it has to copy over a whole load of stuff inside the node_modules folder. ideally, we don't want node_modules to copy over during image build if there's already one on our local instance. we can get aroung this by making a dockerignore file in the project directory. we create a new file called ".dockerignore" and inside this file, we can specify the files or folder that we want docker to ignore such as the node_modules folder, logs file, etc (works just like .gitignore).  
+
+
+Chapter 4
+*Starting and Stopping Containers*
