@@ -1,25 +1,37 @@
 {
-  "name": "mydoshboxappbackend",
-  "version": "1.0.0",
-  "description": "myDoshboxApp",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/myDoshBox/myDoshBoxAppBackend.git"
-  },
-  "keywords": [
-    "transactions",
-    "money",
-    "buyers",
-    "sellers"
-  ],
-  "author": "myDoshbox Team",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/myDoshBox/myDoshBoxAppBackend/issues"
-  },
-  "homepage": "https://github.com/myDoshBox/myDoshBoxAppBackend#readme"
+	"name": "mydoshboxappbackend",
+	"version": "1.0.0",
+	"description": "myDoshboxApp",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node src/index.js",
+		"dev": "nodemon src/index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/myDoshBox/myDoshBoxAppBackend.git"
+	},
+	"keywords": [
+		"transactions",
+		"money",
+		"buyers",
+		"sellers"
+	],
+	"author": "myDoshbox Team",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/myDoshBox/myDoshBoxAppBackend/issues"
+	},
+	"homepage": "https://github.com/myDoshBox/myDoshBoxAppBackend#readme",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"dotenv": "^16.0.3",
+		"express": "^4.18.2",
+		"ip": "^1.1.8",
+		"mysql": "^2.18.1",
+		"pino": "^8.11.0",
+		"pino-pretty": "^9.4.0"
+	}
 }
