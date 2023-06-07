@@ -3,11 +3,10 @@
 	"version": "1.0.0",
 	"description": "myDoshboxApp API",
 	"main": "index.js",
+	"type": "module",
 	"scripts": {
-		"build": "tsc -p .",
-		"dev": "nodemon --exec ts-node src/index.ts",
-		"prod": "tsc -p . && NODE_ENV=prod node dist/index.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"start": "node src/index.js",
+		"dev": "nodemon src/index.js"
 	},
 	"repository": {
 		"type": "git",
@@ -21,29 +20,35 @@
 		"buyers",
 		"sellers"
 	],
-	"author": "myDoshbox Tech Team",
+	"author": "",
 	"license": "ISC",
 	"bugs": {
 		"url": "https://github.com/myDoshBox/myDoshBoxAppBackend/issues"
 	},
 	"homepage": "https://github.com/myDoshBox/myDoshBoxAppBackend#readme",
 	"dependencies": {
+		"bcrypt": "^5.1.0",
+		"cookie-parser": "^1.4.6",
 		"cors": "^2.8.5",
-		"dotenv": "^16.0.3",
+		"dotenv": "^16.1.3",
 		"express": "^4.18.2",
+		"express-session": "^1.17.3",
+		"express-validator": "^7.0.1",
+		"google-auth-library": "^8.8.0",
 		"ip": "^1.1.8",
-		"mysql2": "^3.2.0",
-		"pino": "^8.11.0",
-		"pino-pretty": "^9.4.0"
+		"jsonwebtoken": "^9.0.0",
+		"mysql2": "^3.3.3",
+		"nodemailer": "^6.9.3",
+		"uuidv4": "^6.2.13"
 	},
 	"devDependencies": {
+		"@types/bcrypt": "^5.0.0",
+		"@types/cookie-parser": "^1.4.3",
 		"@types/cors": "^2.8.13",
-		"@types/dotenv": "^8.2.0",
 		"@types/express": "^4.17.17",
+		"@types/express-session": "^1.17.7",
 		"@types/ip": "^1.1.0",
-		"@types/mysql2": "types/mysql2",
-		"@types/pino": "^7.0.5",
-		"ts-node": "^10.9.1",
-		"typescript": "^4.9.5"
+		"@types/jsonwebtoken": "^9.0.2",
+		"@types/mysql2": "types/mysql2"
 	}
 }

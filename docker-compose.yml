@@ -1,8 +1,0 @@
-services:
-  mysqldb:
-    image: mysql:8.0
-    container_name: mysql_c
-    command: --default-authentication-plugin=mysql_native_password
-    restart: unless-stopped
-    volumes:
-      - ./myDoshBoxAppBackend/src/config/
