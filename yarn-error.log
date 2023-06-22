@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\yarn\bin\yarn.js add uuidv4
+  C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\yarn\bin\yarn.js remove mysql2
 
 PATH: 
-  C:\Users\chidima\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\chidima\bin;C:\Python39\Scripts;C:\Python39;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft VS Code\bin;C:\wamp64\bin\php\php7.3.1;C:\laragon\www;C:\ProgramData\chocolatey\bin;C:\Program Files\Microsoft SQL Server\150\Tools\Binn;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn;C:\Program Files\dotnet;C:\Program Files\PuTTY;C:\HashiCorp\Vagrant\bin;C:\Program Files\Git\cmd;C:\Program Files\Amazon\AWSCLIV2;C:\Program Files\nodejs;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin;C:\Python\Python310\Scripts;C:\Python\Python310;C:\Users\chidima\anaconda3;C:\Users\chidima\anaconda3\Library\mingw-w64\bin;C:\Users\chidima\anaconda3\Library\usr\bin;C:\Users\chidima\anaconda3\Library\bin;C:\Users\chidima\anaconda3\Scripts;C:\Users\chidima\AppData\Local\Microsoft\WindowsApps;C:\Users\chidima\AppData\Roaming\Composer\vendor\bin;C:\Users\chidima\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\chidinma\Anaconda3\Scripts;C:\Users\chidinma\Anaconda3;C:\Users\chidinma\Anaconda3\Library\bin;C:\Users\chidima\.dotnet\tools;C:\Users\chidima\AppData\Roaming\npm;C:\Program Files\JetBrains\PyCharm 2022.3.2\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+  C:\Python39\Scripts\;C:\Python39\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Microsoft VS Code\bin;C:\wamp64\bin\php\php7.3.1;C:\laragon\www;C:\ProgramData\chocolatey\bin;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\dotnet\;C:\Program Files\PuTTY\;C:\HashiCorp\Vagrant\bin;C:\Program Files\Git\cmd;C:\Program Files\Amazon\AWSCLIV2\;C:\Program Files\Docker\Docker\resources\bin;C:\Users\chidima\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Python\Python310\Scripts\;C:\Python\Python310\;C:\Users\chidima\anaconda3;C:\Users\chidima\anaconda3\Library\mingw-w64\bin;C:\Users\chidima\anaconda3\Library\usr\bin;C:\Users\chidima\anaconda3\Library\bin;C:\Users\chidima\anaconda3\Scripts;C:\Users\chidima\AppData\Local\Microsoft\WindowsApps;C:\Users\chidima\AppData\Roaming\Composer\vendor\bin;C:\Users\chidima\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\chidinma\Anaconda3\Scripts;C:\Users\chidinma\Anaconda3;C:\Users\chidinma\Anaconda3\Library\bin;C:\Users\chidima\.dotnet\tools;C:\Users\chidima\AppData\Roaming\npm;C:\Program Files\JetBrains\PyCharm 2022.3.2\bin;;C:\Users\chidima\AppData\Roaming\nvm;C:\Program Files\nodejs
 
 Yarn version: 
   1.22.19
@@ -14,12 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: Client network socket disconnected before secure TLS connection was established
-      at connResetException (node:internal/errors:717:14)
-      at TLSSocket.onConnectEnd (node:_tls_wrap:1595:19)
-      at TLSSocket.emit (node:events:525:35)
-      at endReadableNT (node:internal/streams/readable:1359:12)
-      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+  Error: ENOENT: no such file or directory, copyfile 'C:\Users\chidima\AppData\Local\Yarn\Cache\v6\npm-merge-descriptors-1.0.1-b00aaa556dd8b44568150ec9d1b953f3f90cbb61-integrity\node_modules\merge-descriptors\HISTORY.md' -> 'C:\Users\chidima\Documents\myDoshBoxApp\myDoshBoxAppBackend\node_modules\merge-descriptors\HISTORY.md'
 
 npm manifest: 
   {
@@ -29,8 +24,8 @@ npm manifest:
   	"main": "index.js",
   	"type": "module",
   	"scripts": {
-  		"start": "node src/index.js",
-  		"dev": "nodemon src/index.js"
+  		"start": "node src/server.js",
+  		"dev": "nodemon src/server.js"
   	},
   	"repository": {
   		"type": "git",
@@ -59,21 +54,13 @@ npm manifest:
   		"express-session": "^1.17.3",
   		"express-validator": "^7.0.1",
   		"google-auth-library": "^8.8.0",
+  		"googleapis": "^118.0.0",
   		"ip": "^1.1.8",
   		"jsonwebtoken": "^9.0.0",
-  		"mysql2": "^3.3.3",
-  		"nodemailer": "^6.9.3"
+  		"nodemailer": "^6.9.3",
+  		"uuidv4": "^6.2.13"
   	},
-  	"devDependencies": {
-  		"@types/bcrypt": "^5.0.0",
-  		"@types/cookie-parser": "^1.4.3",
-  		"@types/cors": "^2.8.13",
-  		"@types/express": "^4.17.17",
-  		"@types/express-session": "^1.17.7",
-  		"@types/ip": "^1.1.0",
-  		"@types/jsonwebtoken": "^9.0.2",
-  		"@types/mysql2": "types/mysql2"
-  	}
+  	"devDependencies": {}
   }
 
 yarn manifest: 
@@ -99,133 +86,10 @@ Lockfile:
       semver "^7.3.5"
       tar "^6.1.11"
   
-  "@types/bcrypt@^5.0.0":
-    version "5.0.0"
-    resolved "https://registry.yarnpkg.com/@types/bcrypt/-/bcrypt-5.0.0.tgz#a835afa2882d165aff5690893db314eaa98b9f20"
-    integrity sha512-agtcFKaruL8TmcvqbndlqHPSJgsolhf/qPWchFlgnW1gECTN/nKbFcoFnvKAQRFfKbh+BO6A3SWdJu9t+xF3Lw==
-    dependencies:
-      "@types/node" "*"
-  
-  "@types/body-parser@*":
-    version "1.19.2"
-    resolved "https://registry.yarnpkg.com/@types/body-parser/-/body-parser-1.19.2.tgz#aea2059e28b7658639081347ac4fab3de166e6f0"
-    integrity sha512-ALYone6pm6QmwZoAgeyNksccT9Q4AWZQ6PvfwR37GT6r6FWUPguq6sUmNGSMV2Wr761oQoBxwGGa6DR5o1DC9g==
-    dependencies:
-      "@types/connect" "*"
-      "@types/node" "*"
-  
-  "@types/connect@*":
-    version "3.4.35"
-    resolved "https://registry.yarnpkg.com/@types/connect/-/connect-3.4.35.tgz#5fcf6ae445e4021d1fc2219a4873cc73a3bb2ad1"
-    integrity sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==
-    dependencies:
-      "@types/node" "*"
-  
-  "@types/cookie-parser@^1.4.3":
-    version "1.4.3"
-    resolved "https://registry.yarnpkg.com/@types/cookie-parser/-/cookie-parser-1.4.3.tgz#3a01df117c5705cf89a84c876b50c5a1fd427a21"
-    integrity sha512-CqSKwFwefj4PzZ5n/iwad/bow2hTCh0FlNAeWLtQM3JA/NX/iYagIpWG2cf1bQKQ2c9gU2log5VUCrn7LDOs0w==
-    dependencies:
-      "@types/express" "*"
-  
-  "@types/cors@^2.8.13":
-    version "2.8.13"
-    resolved "https://registry.yarnpkg.com/@types/cors/-/cors-2.8.13.tgz#b8ade22ba455a1b8cb3b5d3f35910fd204f84f94"
-    integrity sha512-RG8AStHlUiV5ysZQKq97copd2UmVYw3/pRMLefISZ3S1hK104Cwm7iLQ3fTKx+lsUH2CE8FlLaYeEA2LSeqYUA==
-    dependencies:
-      "@types/node" "*"
-  
-  "@types/express-serve-static-core@^4.17.33":
-    version "4.17.35"
-    resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.17.35.tgz#c95dd4424f0d32e525d23812aa8ab8e4d3906c4f"
-    integrity sha512-wALWQwrgiB2AWTT91CB62b6Yt0sNHpznUXeZEcnPU3DRdlDIz74x8Qg1UUYKSVFi+va5vKOLYRBI1bRKiLLKIg==
-    dependencies:
-      "@types/node" "*"
-      "@types/qs" "*"
-      "@types/range-parser" "*"
-      "@types/send" "*"
-  
-  "@types/express-session@^1.17.7":
-    version "1.17.7"
-    resolved "https://registry.yarnpkg.com/@types/express-session/-/express-session-1.17.7.tgz#ced215c1244cb594be10e39f2781ddcd650be9a6"
-    integrity sha512-L25080PBYoRLu472HY/HNCxaXY8AaGgqGC8/p/8+BYMhG0RDOLQ1wpXOpAzr4Gi5TGozTKyJv5BVODM5UNyVMw==
-    dependencies:
-      "@types/express" "*"
-  
-  "@types/express@*", "@types/express@^4.17.17":
-    version "4.17.17"
-    resolved "https://registry.yarnpkg.com/@types/express/-/express-4.17.17.tgz#01d5437f6ef9cfa8668e616e13c2f2ac9a491ae4"
-    integrity sha512-Q4FmmuLGBG58btUnfS1c1r/NQdlp3DMfGDGig8WhfpA2YRUtEkxAjkZb0yvplJGYdF1fsQ81iMDcH24sSCNC/Q==
-    dependencies:
-      "@types/body-parser" "*"
-      "@types/express-serve-static-core" "^4.17.33"
-      "@types/qs" "*"
-      "@types/serve-static" "*"
-  
-  "@types/ip@^1.1.0":
-    version "1.1.0"
-    resolved "https://registry.yarnpkg.com/@types/ip/-/ip-1.1.0.tgz#aec4f5bfd49e4a4c53b590d88c36eb078827a7c0"
-    integrity sha512-dwNe8gOoF70VdL6WJBwVHtQmAX4RMd62M+mAB9HQFjG1/qiCLM/meRy95Pd14FYBbEDwCq7jgJs89cHpLBu4HQ==
-    dependencies:
-      "@types/node" "*"
-  
-  "@types/jsonwebtoken@^9.0.2":
-    version "9.0.2"
-    resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-9.0.2.tgz#9eeb56c76dd555039be2a3972218de5bd3b8d83e"
-    integrity sha512-drE6uz7QBKq1fYqqoFKTDRdFCPHd5TCub75BM+D+cMx7NU9hUz7SESLfC2fSCXVFMO5Yj8sOWHuGqPgjc+fz0Q==
-    dependencies:
-      "@types/node" "*"
-  
-  "@types/mime@*":
-    version "3.0.1"
-    resolved "https://registry.yarnpkg.com/@types/mime/-/mime-3.0.1.tgz#5f8f2bca0a5863cb69bc0b0acd88c96cb1d4ae10"
-    integrity sha512-Y4XFY5VJAuw0FgAqPNd6NNoV44jbq9Bz2L7Rh/J6jLTiHBSBJa9fxqQIvkIld4GsoDOcCbvzOUAbLPsSKKg+uA==
-  
-  "@types/mime@^1":
-    version "1.3.2"
-    resolved "https://registry.yarnpkg.com/@types/mime/-/mime-1.3.2.tgz#93e25bf9ee75fe0fd80b594bc4feb0e862111b5a"
-    integrity sha512-YATxVxgRqNH6nHEIsvg6k2Boc1JHI9ZbH5iWFFv/MTkchz3b1ieGDa5T0a9RznNdI0KhVbdbWSN+KWWrQZRxTw==
-  
-  "@types/mysql2@types/mysql2":
-    version "1.0.0"
-    resolved "https://codeload.github.com/types/mysql2/tar.gz/89378b2cb3974ea8cdd1d633b8f056e54e5d2384"
-    dependencies:
-      "@types/mysql" types/mysql
-  
-  "@types/mysql@types/mysql":
-    version "2.0.0"
-    resolved "https://codeload.github.com/types/mysql/tar.gz/c26b1bc2bac17010081455e3127a90fb2eafcec9"
-  
-  "@types/node@*":
-    version "20.2.5"
-    resolved "https://registry.yarnpkg.com/@types/node/-/node-20.2.5.tgz#26d295f3570323b2837d322180dfbf1ba156fefb"
-    integrity sha512-JJulVEQXmiY9Px5axXHeYGLSjhkZEnD+MDPDGbCbIAbMslkKwmygtZFy1X6s/075Yo94sf8GuSlFfPzysQrWZQ==
-  
-  "@types/qs@*":
-    version "6.9.7"
-    resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.9.7.tgz#63bb7d067db107cc1e457c303bc25d511febf6cb"
-    integrity sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==
-  
-  "@types/range-parser@*":
-    version "1.2.4"
-    resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.4.tgz#cd667bcfdd025213aafb7ca5915a932590acdcdc"
-    integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
-  
-  "@types/send@*":
-    version "0.17.1"
-    resolved "https://registry.yarnpkg.com/@types/send/-/send-0.17.1.tgz#ed4932b8a2a805f1fe362a70f4e62d0ac994e301"
-    integrity sha512-Cwo8LE/0rnvX7kIIa3QHCkcuF21c05Ayb0ZfxPiv0W8VRiZiNW/WuRupHKpqqGVGf7SUA44QSOUKaEd9lIrd/Q==
-    dependencies:
-      "@types/mime" "^1"
-      "@types/node" "*"
-  
-  "@types/serve-static@*":
-    version "1.15.1"
-    resolved "https://registry.yarnpkg.com/@types/serve-static/-/serve-static-1.15.1.tgz#86b1753f0be4f9a1bee68d459fcda5be4ea52b5d"
-    integrity sha512-NUo5XNiAdULrJENtJXZZ3fHtfMolzZwczzBbnAeBbqBwG+LaG6YaJtuwzwGSQZ2wsCrxjEhNNjAkKigy3n8teQ==
-    dependencies:
-      "@types/mime" "*"
-      "@types/node" "*"
+  "@types/uuid@8.3.4":
+    version "8.3.4"
+    resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-8.3.4.tgz#bd86a43617df0594787d38b735f55c805becf1bc"
+    integrity sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==
   
   abbrev@1:
     version "1.1.1"
@@ -657,7 +521,7 @@ Lockfile:
       once "^1.3.0"
       path-is-absolute "^1.0.0"
   
-  google-auth-library@^8.8.0:
+  google-auth-library@^8.0.2, google-auth-library@^8.8.0:
     version "8.8.0"
     resolved "https://registry.yarnpkg.com/google-auth-library/-/google-auth-library-8.8.0.tgz#2e17494431cef56b571420d483a4debff6c481cd"
     integrity sha512-0iJn7IDqObDG5Tu9Tn2WemmJ31ksEa96IyK0J0OZCpTh6CrC6FrattwKX87h3qKVuprCJpdOGKc1Xi8V0kMh8Q==
@@ -678,6 +542,26 @@ Lockfile:
     integrity sha512-WPkN4yGtz05WZ5EhtlxNDWPhC4JIic6G8ePitwUWy4l+XPVYec+a0j0Ts47PDtW59y3RwAhUd9/h9ZZ63px6RQ==
     dependencies:
       node-forge "^1.3.1"
+  
+  googleapis-common@^6.0.0:
+    version "6.0.4"
+    resolved "https://registry.yarnpkg.com/googleapis-common/-/googleapis-common-6.0.4.tgz#bd968bef2a478bcd3db51b27655502a11eaf8bf4"
+    integrity sha512-m4ErxGE8unR1z0VajT6AYk3s6a9gIMM6EkDZfkPnES8joeOlEtFEJeF8IyZkb0tjPXkktUfYrE4b3Li1DNyOwA==
+    dependencies:
+      extend "^3.0.2"
+      gaxios "^5.0.1"
+      google-auth-library "^8.0.2"
+      qs "^6.7.0"
+      url-template "^2.0.8"
+      uuid "^9.0.0"
+  
+  googleapis@^118.0.0:
+    version "118.0.0"
+    resolved "https://registry.yarnpkg.com/googleapis/-/googleapis-118.0.0.tgz#a8b9f84d283544b85927abeb989252cb2f3ec490"
+    integrity sha512-Ny6zJOGn5P/YDT6GQbJU6K0lSzEu4Yuxnsn45ZgBIeSQ1RM0FolEjUToLXquZd89DU9wUfqA5XYHPEctk1TFWg==
+    dependencies:
+      google-auth-library "^8.0.2"
+      googleapis-common "^6.0.0"
   
   gtoken@^6.1.0:
     version "6.1.2"
@@ -1069,6 +953,13 @@ Lockfile:
     dependencies:
       side-channel "^1.0.4"
   
+  qs@^6.7.0:
+    version "6.11.2"
+    resolved "https://registry.yarnpkg.com/qs/-/qs-6.11.2.tgz#64bea51f12c1f5da1bc01496f48ffcff7c69d7d9"
+    integrity sha512-tDNIz22aBzCDxLtVH++VnTfzxlfeK5CbqohpSqpJgj1Wg/cQbStNAz3NuqCs5vV+pjBsK4x4pN9HlVh7rcYRiA==
+    dependencies:
+      side-channel "^1.0.4"
+  
   random-bytes@~1.0.0:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/random-bytes/-/random-bytes-1.0.0.tgz#4f68a1dc0ae58bd3fb95848c30324db75d64360b"
@@ -1260,6 +1151,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
     integrity sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==
   
+  url-template@^2.0.8:
+    version "2.0.8"
+    resolved "https://registry.yarnpkg.com/url-template/-/url-template-2.0.8.tgz#fc565a3cccbff7730c775f5641f9555791439f21"
+    integrity sha512-XdVKMF4SJ0nP/O7XIPB0JwAEuT9lDIYnNsK8yGVe43y0AWoKeJNdv3ZNWh7ksJ6KqQFjOO6ox/VEitLnaVNufw==
+  
   util-deprecate@^1.0.1:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
@@ -1269,6 +1165,24 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
     integrity sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==
+  
+  uuid@8.3.2:
+    version "8.3.2"
+    resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
+    integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
+  
+  uuid@^9.0.0:
+    version "9.0.0"
+    resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.0.tgz#592f550650024a38ceb0c562f2f6aa435761efb5"
+    integrity sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==
+  
+  uuidv4@^6.2.13:
+    version "6.2.13"
+    resolved "https://registry.yarnpkg.com/uuidv4/-/uuidv4-6.2.13.tgz#8f95ec5ef22d1f92c8e5d4c70b735d1c89572cb7"
+    integrity sha512-AXyzMjazYB3ovL3q051VLH06Ixj//Knx7QnUSi1T//Ie3io6CpsPu9nVMOx5MoLWh6xV0B9J0hIaxungxXUbPQ==
+    dependencies:
+      "@types/uuid" "8.3.4"
+      uuid "8.3.2"
   
   validator@^13.9.0:
     version "13.9.0"
