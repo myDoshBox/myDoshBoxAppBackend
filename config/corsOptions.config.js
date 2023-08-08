@@ -1,4 +1,4 @@
-const allowedOrigins = require("./allowedOrigins.model");
+import allowedOrigins from "./allowedOrigins.config.js";
 
 const corsOptions = {
 	origin: (origin, callback) => {
@@ -10,7 +10,11 @@ const corsOptions = {
 	},
 
 	credentials: true,
+	// headers: {
+	// 	Accept: "application/json",
+	// 	"Content-Type": "application/json",
+	// },
 	optionSuccessStatus: 200,
 };
 
-module.exports = corsOptions;
+export default corsOptions;

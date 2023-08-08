@@ -1,53 +1,48 @@
-require("dotenv").config();
-const express = require("express");
-const path = require("path");
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
-const { logger, logEvents } = require("./middleware/logger.model");
-const errorHandler = require("./middleware/errorHandler.middleware");
-const corsOptions = require("./config/corsOptions.model");
-const connectDB = require("./config/dbconn.config");
-const mongoose = require("mongoose");
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import connectDB from "./config/dbconn.config.js";
+import userRoutes from "./routes/userRoutes.route.js";
+import authRoutes from "./routes/authRoutes.route.js";
+import corsOptions from "./config/corsOptions.config.js";
 
-// console.log(process.env.NODE_ENV);
+const app = express();
+
+// middlewares
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(cookieParser());
+app.use(cors(corsOptions));
+app.use(cors());
+app.disable("x-powered-by"); // less hackers know about our stack
+
+// api routes
+// app.use("api", router);
+app.use("/auth", authRoutes);
+app.use("/users", userRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-connectDB();
-
-const app = express();
-// app.use(cors(corsOptions));
-app.use(cors(corsOptions));
-app.use(logger);
-app.use(express.json());
-app.use(cookieParser());
-
-app.use("/", express.static(path.join(__dirname, "public")));
-app.use("/", require("./routes/root.route"));
-app.use("/users", require("./routes/userRoutes.route"));
-
-app.all("*", (req, res) => {
-	res.status(404);
-	if (req.accepts("html")) {
-		res.sendFile(path.join(__dirname, "views", "404.html"));
-	} else if (req.accepts("json")) {
-		res.json({ message: "Not Found" });
-	} else {
-		res.type("txt").send("404 Not Found");
-	}
+// http get request for root route
+app.get("/", (req, res) => {
+	res.status(200).json("Welcome to DoshBox API");
 });
 
-app.use(errorHandler);
-
-mongoose.connection.once("open", () => {
-	console.log("connected to mongoose");
-	app.listen(PORT, () => console.log(`server is running on port: ${PORT}`));
-});
-
-mongoose.connection.on("error", (err) => {
-	console.log(err);
-	logEvents(
-		`${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`,
-		"mongoErrLog.log"
-	);
-});
+// start server only if mongo is connected
+connectDB()
+	.then(() => {
+		try {
+			console.log("connected to mongoose");
+			app.listen(PORT, () => {
+				console.log(`server is running on http://localhost:${PORT}`);
+			});
+		} catch (error) {
+			// console.log("cannot connect to the server");
+			throw new Error(error);
+		}
+	})
+	.catch((error) => {
+		// console.log("Invalid database connection...!");
+		throw new Error(error);
+		// console.error(error.message);
+	});

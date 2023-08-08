@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const AutoIncrement = require("mongoose-sequence")(mongoose);
 
 const transactionSchema = new mongoose.Schema(
 	{
@@ -30,7 +31,7 @@ const transactionSchema = new mongoose.Schema(
 
 		transaction_status: {
 			type: Boolean,
-			required: true,
+			default: false,
 		},
 	},
 
@@ -38,5 +39,11 @@ const transactionSchema = new mongoose.Schema(
 		timestamps: true,
 	}
 );
+
+transactionSchema.plugin(AutoIncrement, {
+	inc_field: "ticket",
+	id: "ticketNums",
+	start_seq: 500,
+});
 
 module.exports = mongoose.model("Transaction", transactionSchema);

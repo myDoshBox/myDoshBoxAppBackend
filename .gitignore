@@ -1,4 +1,5 @@
 node_modules
 logs
 .env
+.envs.js
 doshbox_design.sql

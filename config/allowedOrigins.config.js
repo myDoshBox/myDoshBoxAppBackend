@@ -4,4 +4,4 @@ const allowedOrigins = [
 	// you can add other apps
 ];
 
-module.exports = allowedOrigins;
+export default allowedOrigins;
