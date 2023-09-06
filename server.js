@@ -1,10 +1,10 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import connectDB from "./config/dbconn.config.js";
-import userRoutes from "./routes/userRoutes.route.js";
-import authRoutes from "./routes/authRoutes.route.js";
-import corsOptions from "./config/corsOptions.config.js";
+import connectDB from "./src/config/dbconn.config.js";
+import userRoutes from "./src/routes/userRoutes.route.js";
+import authRoutes from "./src/routes/authRoutes.route.js";
+import corsOptions from "./src/config/corsOptions.config.js";
 
 const app = express();
 
