@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as controller from "../controllers/authController.controller.js";
+import * as controller from "../controllers/userAuthController.controller.js";
 import { loginLimiter } from "../middleware/loginLimiter.middleware.js";
 import { verifyJWT } from "../middleware/verifyJWT.middleware.js";
 import { getUser } from "../controllers/userControllers.controller.js";
