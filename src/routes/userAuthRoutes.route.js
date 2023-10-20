@@ -1,12 +1,15 @@
 import { Router } from "express";
 import * as controller from "../controllers/authController.controller.js";
-import { loginLimiter } from "../middleware/loginLimiter.js";
-import { verifyJWT } from "../middleware/verifyJWT.js";
+import { loginLimiter } from "../middleware/loginLimiter.middleware.js";
+import { verifyJWT } from "../middleware/verifyJWT.middleware.js";
 import { getUser } from "../controllers/userControllers.controller.js";
 // const loginLimiter = require("../middleware/loginLimiter");
-import { localVariables } from "../middleware/localVariables.js";
-import { verifyUser } from "../middleware/verifyUser.js";
-import { registerMail, sendVerificationMail } from "../services/userMailer.js";
+import { localVariables } from "../middleware/localVariables.middleware.js";
+import { verifyUser } from "../middleware/verifyUser.middleware.js";
+import {
+  registerMail,
+  sendVerificationMail,
+} from "../services/userMailer.service.js";
 
 const router = Router();
 
@@ -18,8 +21,8 @@ router.route("/registermail").post(registerMail); // send mail
 // router.route("/verifymail/:user_id/:uniqueString").get(sendVerificationMail); // send mail
 router.route("/:user_id/verifymail/:token").get(controller.verifyEmail); // send mail
 router
-	.route("/generateotp")
-	.get(verifyUser, localVariables, controller.generateOTP); // generate random otp
+  .route("/generateotp")
+  .get(verifyUser, localVariables, controller.generateOTP); // generate random otp
 router.route("/verifyotp").get(controller.verifyOTP);
 router.route("/authenticate").post(verifyUser, (req, res) => res.end()); // authenticate user
 router.route("/createresetsession").get(controller.createResetSession);

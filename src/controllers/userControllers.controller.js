@@ -1,35 +1,35 @@
-import UserModel from "../models/IndividualUserModels/IndividualUserModel.model.js";
+import UserModel from "../models/IndividualUserModels/IndividualUserModel.IndividualUserModels.js";
 import bcrypt from "bcrypt";
 
 /** GET: http://localhost:5000/users/user/:user_id */
 export const getUser = async (req, res) => {
-	try {
-		const user = await UserModel.findOne(req.params._id)
-			.select("-user_password")
-			.lean();
+  try {
+    const user = await UserModel.findOne(req.params._id)
+      .select("-user_password")
+      .lean();
 
-		if (!user) {
-			return res.status(400).json({ message: "User not Found" });
-		}
+    if (!user) {
+      return res.status(400).json({ message: "User not Found" });
+    }
 
-		res.json(user);
-	} catch (err) {
-		throw new Error(err);
-	}
+    res.json(user);
+  } catch (err) {
+    throw new Error(err);
+  }
 };
 
 /** GET: http://localhost:5000/users */
 export const getAllUsers = async (req, res) => {
-	try {
-		const users = await UserModel.find().select("-user_password").lean();
-		if (!users?.length) {
-			return res.status(400).json({ message: "no users found" });
-		}
+  try {
+    const users = await UserModel.find().select("-user_password").lean();
+    if (!users?.length) {
+      return res.status(400).json({ message: "no users found" });
+    }
 
-		res.json(users);
-	} catch (error) {
-		throw new Error(error);
-	}
+    res.json(users);
+  } catch (error) {
+    throw new Error(error);
+  }
 };
 
 // /** PUT: http://localhost:5000/users/updateuser
@@ -137,85 +137,87 @@ export const getAllUsers = async (req, res) => {
  * }
  */
 export const updateUser = async (req, res) => {
-	try {
-		const user = await UserModel.findById(req.user._id);
+  try {
+    const user = await UserModel.findById(req.user._id);
 
-		if (user) {
-			let { user_email, user_phone_num, full_name, user_name } = req.body;
+    if (user) {
+      let { user_email, user_phone_num, full_name, user_name } = req.body;
 
-			// confirm data
-			if (
-				user_email === "" ||
-				user_phone_num === "" ||
-				full_name === "" ||
-				user_name === ""
-			) {
-				return res.status(400).json({ message: "all fields are required" });
-			}
-		}
+      // confirm data
+      if (
+        user_email === "" ||
+        user_phone_num === "" ||
+        full_name === "" ||
+        user_name === ""
+      ) {
+        return res.status(400).json({ message: "all fields are required" });
+      }
+    }
 
-		// check for duplicate
-		const duplicate = await UserModel.findOne({ user_email }).lean().exec();
-		// console.log(duplicate);
+    // check for duplicate
+    const duplicate = await UserModel.findOne({ user_email }).lean().exec();
+    // console.log(duplicate);
 
-		// allow update to the original user
-		if (duplicate && duplicate?._id.toString() !== duplicate._id) {
-			return res.status(409).json({ message: "Duplicate email" });
-		}
+    // allow update to the original user
+    if (duplicate && duplicate?._id.toString() !== duplicate._id) {
+      return res.status(409).json({ message: "Duplicate email" });
+    }
 
-		user.user_email = user_email;
-		user.user_phone_num = user_phone_num;
-		user.full_name = full_name;
-		user.user_name = user_name;
+    user.user_email = user_email;
+    user.user_phone_num = user_phone_num;
+    user.full_name = full_name;
+    user.user_name = user_name;
 
-		if (user_password) {
-			// hash password
-			user.user_password = await bcrypt.hash(user_password, 10);
-		}
+    if (user_password) {
+      // hash password
+      user.user_password = await bcrypt.hash(user_password, 10);
+    }
 
-		// const updatedUser = await user.save();
-		const updatedUser = await user.save();
-		// console.log(updatedUser);
+    // const updatedUser = await user.save();
+    const updatedUser = await user.save();
+    // console.log(updatedUser);
 
-		res.json({
-			message: `${updatedUser.user_email} data updated successfully`,
-		});
-	} catch (error) {
-		throw new Error(error);
-	}
+    res.json({
+      message: `${updatedUser.user_email} data updated successfully`,
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
 };
 
 /** DELETE: http://localhost:5000/users/deleteuser */
 export const deleteUser = async (req, res) => {
-	try {
-		const { id } = req.body;
+  try {
+    const { id } = req.body;
 
-		console.log(id);
+    // let { user_email, user_phone_num, user_password } = req.body;
 
-		if (!id) {
-			return res.status(400).json({ message: "User id Required" });
-		}
+    console.log(id);
 
-		// const transaction = await Transaction.findOne({ user: id }).lean().exec();
+    if (!id) {
+      return res.status(400).json({ message: "User id Required" });
+    }
 
-		// if (transaction?.length) {
-		// 	return res.status(400).json({ message: "user has transactions" });
-		// }
+    // const transaction = await Transaction.findOne({ user: id }).lean().exec();
 
-		const user = await UserModel.findById(id).exec();
+    // if (transaction?.length) {
+    // 	return res.status(400).json({ message: "user has transactions" });
+    // }
 
-		if (!user) {
-			return res.status(400).json({ message: "User not found" });
-		}
+    const user = await UserModel.findById(id).exec();
 
-		const result = await user.deleteOne();
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
 
-		// const reply = `User ${result.user_email} with ID ${result.id}`;
+    const result = await user.deleteOne();
 
-		res.json(
-			`User ${result.user_email} with ID ${result.id} was deleted successfully`
-		);
-	} catch (error) {
-		throw new Error(error);
-	}
+    // const reply = `User ${result.user_email} with ID ${result.id}`;
+
+    res.json(
+      `User ${result.user_email} with ID ${result.id} was deleted successfully`
+    );
+  } catch (error) {
+    throw new Error(error);
+  }
 };

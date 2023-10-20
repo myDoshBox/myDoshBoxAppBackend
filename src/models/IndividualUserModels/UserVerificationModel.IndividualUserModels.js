@@ -39,28 +39,28 @@ import mongoose, { Schema } from "mongoose";
 // 	* "roles": "individualusers"
 // 		*
 export const UserVerificationSchema = new mongoose.Schema({
-	user_id: {
-		type: Schema.Types.ObjectId,
-		required: true,
-		ref: "User",
-		unique: true,
-	},
+  user_id: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: "User",
+    unique: true,
+  },
 
-	token: {
-		type: String,
-		required: true,
-		unique: true,
-	},
+  token: {
+    type: String,
+    required: true,
+    unique: true,
+  },
 
-	createdAt: {
-		type: Date,
-		default: Date.now(),
-		expires: 3600, // 1hr
-	},
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+    expires: 3600, // 1hr
+  },
 
-	// expiresAt: {
-	// 	type: Date,
-	// },
+  // expiresAt: {
+  // 	type: Date,
+  // },
 });
 
 export default mongoose.model("UserVerificationModel", UserVerificationSchema);

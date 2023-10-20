@@ -16,11 +16,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const connectDB = async () => {
-	try {
-		await mongoose.connect(process.env.DATABASE_URI);
-	} catch (err) {
-		throw new Error(err);
-	}
+  try {
+    await mongoose.connect(process.env.DATABASE_URI);
+  } catch (err) {
+    throw new Error(err);
+  }
 };
 
 export default connectDB;

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as usersController from "../controllers/userControllers.controller.js";
-import { verifyJWT } from "../middleware/verifyJWT.js";
+import { verifyJWT } from "../middleware/verifyJWT.middleware.js";
 
 const router = Router();
 
@@ -20,13 +20,20 @@ router.route("/").get(usersController.getAllUsers);
 // 	.delete(usersController.deleteUser);
 
 router
-	.route("/user")
-	.get(usersController.getUser)
-	.put(usersController.updateUser);
+  .route("/user")
+  .get(usersController.getUser)
+  .put(usersController.updateUser);
 
 router
-	.route("/deluser")
-	.get(usersController.getUser)
-	.delete(usersController.updateUser);
+  .route("/deluser")
+  .get(usersController.getUser)
+  .delete(usersController.updateUser);
+
+// check this out later
+// router
+//   .route("/user")
+//   .get(usersController.getUser)
+//   .put(usersController.getUser)
+//   .delete(usersController.updateUser);
 
 export default router;
